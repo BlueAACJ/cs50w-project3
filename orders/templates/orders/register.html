@@ -1,0 +1,42 @@
+{% extends "orders/layout.html" %} 
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block template %}
+<div class="col-12" id="register">
+    <form class="row g-3" action="{% url 'orders:register' %}" method="POST">
+        {% csrf_token %}
+        <h2>Registrate</h2>
+        <div class="col-md-6">
+            <label for="username" class="form-label">Nombres</label>
+            <input type="text" id="last_name" name="last_name" id="username" name="username" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label for="full-name" class="form-label">Apellidos</label>
+            <input type="text" id="first_name" name="first_name" class="form-control">
+        </div>
+        <div class="mb-4">
+            <label for="full-name" class="form-label">Nombre de usuario</label>
+            <input type="text" id="username" name="username" class="form-control">
+        </div>
+        <div class="mb-4">
+            <label for="email" class="form-label">Correo Electronico</label>
+            <input type="email" id="email" name="email" class="form-control" id="exampleInputEmail1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">contraseña</label>
+            <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="col-12">
+            <button value="Register" type="submit" class="btn btn-primary">Registrate</button>
+            <p class="mb-3">Ya tienes una cuenta?<a href="{% url 'orders:login' %}">Inicia Sesion</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

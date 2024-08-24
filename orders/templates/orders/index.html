@@ -1,0 +1,57 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{%block template%}
+<div class="col-12">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="py-3 bg-cyan-800">Platillo </th>
+        <th scope="col" class="py-3 bg-cyan-800">Tamano</th>
+        <th scope="col" class="py-3 bg-cyan-800">precio</th>
+        <th scope="col" class="py-3 bg-cyan-800">Opciones</th>
+        <th scope="col" class="py-3 bg-cyan-800 text-cyan-800"> </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in menu_item %}
+        {% csrf_token %}
+        {% ifchanged item.category %}
+          <tr id="{{item.category}}">
+            <th scope="col">
+              <h2> {{ item.category }} </h2>
+            </th>
+          </tr>
+        {% endifchanged %}
+      <tr>
+        <td >{{item.name}}</td>
+        <td >{{item.sizes}}</td>
+        <td >{{item.price}}</td>
+        {% if item.category == "Pizza" and "Topping" in item.name %}
+        <td >
+          <a class="btn btn-info" href="{% url 'orders:customize_order' item.name %}">Personalizar</a>
+        </td>
+        {% elif item.category == "Subs" %}
+        <td ><a class="btn btn-info" href="{% url 'orders:customize_order' item.name %} ">Personalizar</a>
+        </td>
+        {% else %}
+        <form class="" action="{% url 'orders:add_to_cart' item.id %}" method="post">
+          {% csrf_token %}
+          <td>
+            <label for="qauntity">Cantidad:</label>
+            <input name="quantity" id="quantity" type="number" value=1 min=1 max=30>
+          </td>            
+          <td>
+            <button type="submit" class="btn btn-success">Añadir</button>
+          </td>
+        </form>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

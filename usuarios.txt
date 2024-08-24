@@ -1,0 +1,37 @@
+Administrador:
+    admin1
+
+    admin@pizza.com	
+
+    pepe1
+
+Usuarios:
+    prueba1
+
+    pizzapizza
+
+    usuario
+
+    pizzapizza
+
+    Registro
+
+    prueba@prueba.com
+
+    kaka12
+
+    Ultima Prueba 
+
+    Carcamo 
+
+    kaka
+
+    jose
+
+    kola85
+
+    /**** Ultimo Usuario registrado ****/ 
+
+    BlueAACJ
+
+    vasocasa

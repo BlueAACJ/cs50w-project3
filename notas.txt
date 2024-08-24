@@ -1,0 +1,8 @@
+- .env
+    Variables de entorno necesarias para la ejecucion del prototipo:
+
+    DEBUG=True
+    Activa o desactiva el modo de depuración. True activo False desactivo 
+
+    SECRET_KEY='SecretKey1234'
+    Es una cadena de caracteres aleatoria y única que se utiliza para asegurar varios aspectos del funcionamiento de la aplicación. Ejemplo:'MessiTheGoat'

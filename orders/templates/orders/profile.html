@@ -1,0 +1,71 @@
+{% extends 'orders/layout.html' %}
+
+{% block title %}
+    Historial de ordenes 
+{% endblock %}
+
+{% block template %}
+<div class="col-12">
+    <h1>Historial de ordenes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Fecha de orden</th>
+                <th scope="col">Items</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in my_orders %}
+            <tr>
+                <th>{{ order.date_ordered }}</th>
+                <td>
+                    {% for item in order.ordered_items.all %}
+                        {%if item.menu_item.category == "Pizza" and "Topping" in item.menu_item.name %}
+                            {% if item.ptoppings != False %}
+                                {{item.menu_item.sizes}}
+                                {{ item.menu_item.name }}
+                                Toppings: {{ item.ptoppings }}
+                            {% endif %}
+                        {% endif %}
+
+                        {%if item.menu_item.category == "Pizza" and "Topping" not in item.menu_item.name %}
+                            {{item.menu_item.sizes}}
+                            {{ item.menu_item.name }}
+                        {% endif %}
+
+                        {% if item.menu_item.category == "Subs" and item.num_extras == 0 %}
+                            {{item.menu_item.sizes}}
+                            {{ item.menu_item.name }}
+                        {% endif %}
+
+                        {% if item.num_extras > 0 %}
+                            {{ item.menu_item.name }}
+                            Extras: {{ item.extras }} ;
+                        {% endif %}
+
+                        {% if item.menu_item.category != "Pizza" and item.menu_item.category != "Subs" %}
+                            {% if item.menu_item.sizes%}
+                            {{item.menu_item.sizes}}
+                        {% endif %}
+
+                        {{ item.menu_item.name }} ;
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ order.get_cart_total }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td scope="col"></td>
+                <td scope="col">No tienes ordenes</td>
+                <td scope="col"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-12">
+        <a class="btn btn-primary" href="{% url 'orders:index' %}"> {% if not order %} Regresar al menu {% else %} Menu  {% endif %}</a>
+    </div>
+</div>
+{% endblock %}

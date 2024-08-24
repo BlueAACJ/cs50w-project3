@@ -1,0 +1,20 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}
+    Promociones
+{% endblock %}
+
+{% block template %}
+<div class="col-12">
+    <h1>En esta seccion encontraras las ofertas del mes</h1>
+    {% for notices in notice %}
+    <div>
+        <h2>{{ notices.title }}</h2>
+        <p>Fecha: {{notices.fecha}}</p>
+    </div>
+    <p>{{ notices.content }}.</p>
+    <p>Mas informacion: {{ notices.description }}.</p>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}
